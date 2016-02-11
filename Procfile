@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/my-app.jar clojure.main -m my-app.core
+web: java $JVM_OPTS -cp target/blog.jar clojure.main -m blog.core

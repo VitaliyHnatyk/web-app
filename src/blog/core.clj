@@ -1,5 +1,5 @@
-(ns my-app.core
-  (:require [my-app.handler :refer [app init destroy]]
+(ns blog.core
+  (:require [blog.handler :refer [app init destroy]]
             [luminus.repl-server :as repl]
             [luminus.http-server :as http]
             [config.core :refer [env]])

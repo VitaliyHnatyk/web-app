@@ -1,8 +1,8 @@
-(ns my-app.config
+(ns blog.config
   (:require [clojure.tools.logging :as log]))
 
 (def defaults
   {:init
    (fn []
-     (log/info "\n-=[my-app started successfully]=-"))
+     (log/info "\n-=[blog started successfully]=-"))
    :middleware identity})

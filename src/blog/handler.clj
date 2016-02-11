@@ -1,12 +1,12 @@
-(ns my-app.handler
+(ns blog.handler
   (:require [compojure.core :refer [defroutes routes wrap-routes]]
-            [my-app.layout :refer [error-page]]
-            [my-app.routes.home :refer [home-routes]]
-            [my-app.middleware :as middleware]
+            [blog.layout :refer [error-page]]
+            [blog.routes.home :refer [home-routes]]
+            [blog.middleware :as middleware]
             [clojure.tools.logging :as log]
             [compojure.route :as route]
             [config.core :refer [env]]
-            [my-app.config :refer [defaults]]
+            [blog.config :refer [defaults]]
             [mount.core :as mount]
             [luminus.logger :as logger]))
 
@@ -25,7 +25,7 @@
   "destroy will be called when your application
    shuts down, put any clean up code here"
   []
-  (log/info "my-app is shutting down...")
+  (log/info "blog is shutting down...")
   (doseq [component (:stopped (mount/stop))]
     (log/info component "stopped"))
   (log/info "shutdown complete!"))

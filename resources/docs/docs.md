@@ -2,12 +2,12 @@
 
 ### Managing Your Middleware
 
-Request middleware functions are located under the `my-app.middleware` namespace.
+Request middleware functions are located under the `blog.middleware` namespace.
 
 This namespace is reserved for any custom middleware for the application. Some default middleware is
 already defined here. The middleware is assembled in the `wrap-base` function.
 
-Middleware used for development is placed in the `my-app.dev-middleware` namespace found in
+Middleware used for development is placed in the `blog.dev-middleware` namespace found in
 the `env/dev/clj/` source path.
 
 ### Here are some links to get started

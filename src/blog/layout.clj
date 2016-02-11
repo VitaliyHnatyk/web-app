@@ -1,4 +1,4 @@
-(ns my-app.layout
+(ns blog.layout
   (:require [selmer.parser :as parser]
             [selmer.filters :as filters]
             [markdown.core :refer [md-to-html-string]]

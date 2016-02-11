@@ -1,4 +1,4 @@
-(defproject my-app "0.1.0-SNAPSHOT"
+(defproject blog "0.1.0-SNAPSHOT"
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -30,13 +30,13 @@
                  [luminus-log4j "0.1.2"]]
 
   :min-lein-version "2.0.0"
-  :uberjar-name "my-app.jar"
+  :uberjar-name "blog.jar"
   :jvm-opts ["-server"]
   :resource-paths ["resources"]
 
-  :main my-app.core
+  :main blog.core
 
-  :plugins [[lein-environ "1.0.1"]]
+  :plugins [[lein-environ "1.0.2"]]
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}

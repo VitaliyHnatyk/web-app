@@ -1,5 +1,5 @@
-(ns my-app.routes.home
-  (:require [my-app.layout :as layout]
+(ns blog.routes.home
+  (:require [blog.layout :as layout]
             [compojure.core :refer [defroutes GET]]
             [ring.util.http-response :refer [ok]]
             [clojure.java.io :as io]))
@@ -11,8 +11,11 @@
 (defn about-page []
   (layout/render "about.html"))
 
+(defn country-page []
+      (layout/render "about.html"))
+
 (defroutes home-routes
   (GET "/" [] (home-page))
-  (GET "/about" [] (about-page))
-  (GET "/country/" [] (about-page)))
+  (GET "/about/" [] (about-page))
+  (GET "/country/" [] (country-page)))
 

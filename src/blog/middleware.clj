@@ -1,5 +1,5 @@
-(ns my-app.middleware
-  (:require [my-app.layout :refer [*app-context* error-page]]
+(ns blog.middleware
+  (:require [blog.layout :refer [*app-context* error-page]]
             [clojure.tools.logging :as log]
             [config.core :refer [env]]
             [ring.middleware.flash :refer [wrap-flash]]
@@ -8,7 +8,7 @@
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.middleware.format :refer [wrap-restful-format]]
-            [my-app.config :refer [defaults]])
+            [blog.config :refer [defaults]])
   (:import [javax.servlet ServletContext]))
 
 (defn wrap-context [handler]
