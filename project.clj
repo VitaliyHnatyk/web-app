@@ -14,9 +14,9 @@
                  [org.webjars/font-awesome "4.5.0"]
                  [org.webjars.bower/tether "1.1.1"]
                  [org.webjars/jquery "2.2.0"]
-                 [org.clojure/java.jdbc "0.3.0"]
-                 [java-jdbc/dsl "0.1.0"]
-                 [org.apache.derby/derby "10.10.1.1"]
+                 [lib-noir "0.8.2"]
+                 [org.clojure/java.jdbc "0.2.3"]
+                 [mysql/mysql-connector-java "5.1.6"]
                  [org.clojure/tools.logging "0.3.1"]
                  [com.taoensso/tower "3.0.2"]
                  [compojure "1.4.0"]
@@ -36,7 +36,8 @@
 
   :main blog.core
 
-  :plugins [[lein-environ "1.0.2"]]
+  :plugins [[lein-environ "1.0.2"]
+            [lein-cljsbuild "1.1.1"]]
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}
