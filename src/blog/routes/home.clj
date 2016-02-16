@@ -28,7 +28,8 @@
   (layout/render "about.html"))
 
 (defn country-page []
-      (layout/render "about.html"))
+  (layout/render "about.html"))
+
 
 (defn display-post [entry & [comment]]
   (layout/render "entry.html"
@@ -46,10 +47,10 @@
       (display-post (db/get-entry id) comment))))
 
 (defroutes home-routes
-  (GET "/" [] (home-page))
-  (GET "/about/" [] (about-page))
-  (GET "/country/" [] (country-page))
-  (GET "/post/:id" [id] (display-post (db/get-entry id)))
-  (POST "/post/:id" [id title content name]
-                 (handle-comment id title content name)))
+           (GET "/" [] (home-page))
+           (GET "/about/" [] (about-page))
+           (GET "/country/" [] (country-page))
+           (GET "/post/:id" [id] (display-post (db/get-entry id)))
+           (POST "/post/:id" [id title content name]
+             (handle-comment id title content name)))
 

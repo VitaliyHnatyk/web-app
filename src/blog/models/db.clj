@@ -9,21 +9,16 @@
       database "blog"
       user "root"
       password ""]
-  (def db {:classname "com.mysql.jdbc.Driver"
-           :subprotocol "mysql"
-           :subname (db-url host port database)
-           :user user
-           :password password}))
+  (def db {:subprotocol "mysql"
+           :subname     (db-url host port database)
+           :user        user
+           :password    password}))
 
 (defn get-entry [id]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from entries where id=?" id] (first res))))
+  (sql/query db ["select * from entries where id=?" id] :result-set-fn first))
 
 (defn create-comment [comment]
-  (sql/with-connection db (sql/insert-record :comments comment)))
+  (sql/insert! db :comments comment))
 
 (defn get-comments [id]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from comments where entry=?" id] (doall res))))
+  (sql/query db ["select * from comments where entry=?" id] :result-set-fn first))
