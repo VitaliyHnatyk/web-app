@@ -11,3 +11,5 @@ profiles.clj
 /.idea
 *.idea
 *.log
+uiDesigner.xml
+jsLibraryMappings.xml
