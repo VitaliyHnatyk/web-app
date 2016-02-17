@@ -9,4 +9,5 @@ pom.xml
 profiles.clj
 /.env
 /.idea
+*.idea
 *.log
