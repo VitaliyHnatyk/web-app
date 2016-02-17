@@ -15,7 +15,7 @@
            :password    password}))
 
 (defn get-entry [id]
-  (sql/query db ["select * from entries where id=?" id] :result-set-fn first))
+  (sql/query db ["select * from entries where id=?" id] ))
 
 (defn create-comment [comment]
   (sql/insert! db :comments comment))

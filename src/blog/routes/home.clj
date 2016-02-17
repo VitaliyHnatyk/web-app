@@ -31,12 +31,12 @@
   (layout/render "about.html"))
 
 
-(defn display-post [entry & [comment]]
+(defn display-post [result & [comment]]
   (layout/render "entry.html"
-                 (conj entry
-                       {:comments (db/get-comments (:id entry))}
-                       {:errors (vali/get-errors (:title :content))}
-                       {:comment comment})))
+                 (conj result
+                         {:comments (db/get-comments (:id result))}
+                         {:errors ((vali/has-value? :title) vali/get-errors [:title :content])}
+                         {:comment comment}) ))
 
 (defn handle-comment [id title content name]
   (let [comment {:entry id :title title :content content :name name}]
@@ -44,7 +44,7 @@
       (do
         (db/create-comment comment)
         (resp/redirect (str "/post/" id)))
-      (display-post (db/get-entry id) comment))))
+      (do (display-post (db/get-entry id) comment) ))))
 
 (defroutes home-routes
            (GET "/" [] (home-page))
