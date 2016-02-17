@@ -1,4 +1,4 @@
-Clojure Blog
+#Clojure Blog
 
 
 ## Prerequisites
