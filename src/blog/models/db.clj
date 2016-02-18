@@ -9,14 +9,13 @@
       database "blog"
       user "root"
       password ""]
-  (def db {:classname "com.mysql.jdbc.Driver"
-           :subprotocol "mysql"
+  (def db {:subprotocol "mysql"
            :subname (db-url host port database)
            :user user
            :password password}))
 
 (defn create-user [user]
-  (sql/with-connection db (sql/insert-record :users user)))
+  db (sql/insert! db :users user))
 
 (defn create-comment [comment]
   (sql/with-connection db (sql/insert-record :comments comment)))
