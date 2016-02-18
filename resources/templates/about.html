@@ -1,4 +1,21 @@
-{% extends "base.html" %}
+{% extends "templates/base.html" %}
 {% block content %}
-  <p>this is the story of blog... work in progress</p>
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-primary">
+                <header class="panel-heading">
+                    <h2 class="panel-title">About</h2>
+                </header>
+                <div class="panel-body">
+                    <p>
+                        This is a blog where I post entries on technical topics.
+                    </p>
+
+                    <p>
+                        The blog is created with Clojure, bootstrapped with the Luminus web framework.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

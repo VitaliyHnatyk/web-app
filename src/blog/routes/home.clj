@@ -1,9 +1,9 @@
 (ns blog.routes.home
-  (:require [blog.layout :as layout]
-            [compojure.core :refer [defroutes GET POST]]
-            [ring.util.http-response :refer [ok]]
-            [clojure.java.io :as io]
+  (:use compojure.core)
+  (:require [blog.views.layout :as layout]
             [blog.models.db :as db]
+            [blog.util :as util]
+            [noir.session :as session]
             [noir.response :as resp]
             [noir.validation :as vali]))
 
@@ -21,22 +21,17 @@
   (not (vali/errors? :title :content :author)))
 
 (defn home-page []
-  (layout/render
-    "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (layout/render "home.html" {:entries (db/get-latest-entries 10)}))
 
 (defn about-page []
   (layout/render "about.html"))
 
-(defn country-page []
-  (layout/render "about.html"))
-
-
-(defn display-post [result & [comment]]
+(defn display-post [entry & [comment]]
   (layout/render "entry.html"
-                 (conj result
-                         {:comments (db/get-comments (:id result))}
-                         {:errors ((vali/has-value? :title) vali/get-errors [:title :content])}
-                         {:comment comment}) ))
+                 (conj entry
+                       {:comments (db/get-comments (:id entry))}
+                       {:errors (vali/get-errors (:title :content))}
+                       {:comment comment})))
 
 (defn handle-comment [id title content name]
   (let [comment {:entry id :title title :content content :name name}]
@@ -44,13 +39,16 @@
       (do
         (db/create-comment comment)
         (resp/redirect (str "/post/" id)))
-      (do (display-post (db/get-entry id) comment) ))))
+      (display-post (db/get-entry id) comment))))
 
 (defroutes home-routes
-           (GET "/" [] (home-page))
-           (GET "/about/" [] (about-page))
-           (GET "/country/" [] (country-page))
-           (GET "/post/:id" [id] (display-post (db/get-entry id)))
+           (GET "" []
+             (home-page))
+           (GET "/" []
+             (home-page))
+           (GET "/about" []
+             (about-page))
+           (GET "/post/:id" [id perma]
+             (display-post (db/get-entry id)))
            (POST "/post/:id" [id title content name]
              (handle-comment id title content name)))
-

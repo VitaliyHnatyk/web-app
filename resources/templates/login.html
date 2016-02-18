@@ -1,0 +1,27 @@
+{% extends "templates/base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-primary">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Login</h2>
+                </header>
+                <div class="panel-body">
+                    <form action="{{servlet-context}}/login" method="post">
+                        <div>
+                            <label for="id">User ID:</label>
+                            <input type="text" name="id" />
+                        </div>
+                        <div>
+                            <label for="pass">Password:</label>
+                            <input type="password" name="pass" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Login" /><a href="{{servlet-context}}/register">Register</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

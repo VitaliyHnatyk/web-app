@@ -2,7 +2,7 @@
   (:require [compojure.core :refer :all]
             [blog.views.layout :as layout]
             [noir.session :as session]
-            [blog.models.admin :as db]
+            [blog.models.db :as db]
             [noir.util.route :refer [restricted]]
             [hiccup.form :refer :all]
             [noir.response :as resp]
@@ -95,4 +95,4 @@
            (GET "/admin/user/:id/delete" [id]
              (restricted (confirm-delete-user (db/get-user id))))
            (POST "/admin/user/:id/delete" [id]
-             (restricted (handle-delete-user id))
+             (restricted (handle-delete-user id))))

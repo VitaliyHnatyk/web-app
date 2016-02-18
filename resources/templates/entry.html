@@ -1,35 +1,35 @@
-{% extends "base.html" %}
+{% extends "templates/base.html" %}
 {% block content %}
-<div class="row-fluid">
-	<div class="span8">
-		<article class="panel panel-primary">
-			<header class="panel-heading">
-				<h2 class="panel-title">{{title}}</h2>
-				<time>{{publishedDate|date:shortDate}}</time>
-			</header>
-			<div class="panel-body">
-				{{content|safe}}
-			</div>
-			<footer class="panel-footer">
-				{{authorid}}
-			</footer>
-		</article>
-		<p><a href="#add-comment">Add a comment</a></p>
-		{% for comment in comments %}
-		<div class="panel panel-info">
-			<header class="panel-heading">
-				<h2 class="panel-title">{{comment.title}}</h2>
-				<time>{{comment.publishedDate|date:shortDate}}</time>
-			</header>
-			<div class="panel-body">
-				{{comment.content}}
-			</div>
-			<footer class="panel-footer">
-				{{comment.name}}
-			</footer>
-		</div>
-		{% endfor %}
-		<a href="#add-comment" name="add-comment">Add your thoughs here</a>
+  <div class="row-fluid">
+    <div class="span8">
+        <article class="panel panel-primary">
+            <header class="panel-heading">
+                <h2 class="panel-title">{{title}}</h2>
+                <time>{{publishedDate|date:shortDate}}</time>
+            </header>
+            <div class="panel-body">
+                {{content|safe}}
+            </div>
+            <footer class="panel-footer">
+                {{authorid}}
+            </footer>
+        </article>
+        <p><a href="#add-comment">Add a comment</a></p>
+        {% for comment in comments %}
+        <div class="panel panel-info">
+        	<header class="panel-heading">
+                <h2 class="panel-title">{{comment.title}}</h2>
+                <time>{{comment.publishedDate|date:shortDate}}</time>
+            </header>
+            <div class="panel-body">
+        		{{comment.content}}
+        	</div>
+        	<footer class="panel-footer">
+                {{comment.name}}
+            </footer>
+        </div>
+        {% endfor %}
+        <a href="#add-comment" name="add-comment">Add your thoughs here</a>
 		<form action="" method="post">
 			<input type="hidden" name="entry" value="{{id}}" />
 			<table>
@@ -56,9 +56,9 @@
 			</table>
 			<input type="submit" value="Add coment" />
 			{% for error in errors %}
-			<div class="error">{{error}}</div>
-			{% endfor %}
+            <div class="error">{{error}}</div>
+            {% endfor %}
 		</form>
-	</div>
-</div>
+    </div>
+  </div>
 {% endblock %}

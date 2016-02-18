@@ -1,58 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <META name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to blog</title>
-
-    <!-- styles -->
-    {% style "/assets/bootstrap/css/bootstrap.min.css" %}
-    {% style "/assets/font-awesome/css/font-awesome.min.css" %}
-
-    {% style "/css/screen.css" %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Jarl André Hübenthal | My blog</title>
   </head>
   <body>
-      <!-- navbar -->
-      <nav class="navbar navbar-light bg-faded" role="navigation">
-          <button class="navbar-toggler hidden-sm-up"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapsing-navbar">
-              &#9776;
-          </button>
-          <div class="collapse navbar-toggleable-xs" id="collapsing-navbar">
-              <a class="navbar-brand" href="{{servlet-context}}/">blog</a>
-              <ul class="nav navbar-nav">
-                  <li class="nav-item">
-                      <a href="{{servlet-context}}/"
-                         class="navbar-brand{% ifequal page "home.html" %} active{%endifequal%}">
-                      home
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{servlet-context}}/about"
-                         class="nav-link{% ifequal page "about.html" %} active{%endifequal%}">
-                      about
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
+    <!-- navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{{servlet-context}}/">Blog</a>
+        </div>
+        <div class="navbar-collapse collapse ">
+          <ul class="nav navbar-nav">
+            <li class="{{home-selected}}"><a href="{{servlet-context}}/">Home</a></li>
+            <li class="{{about-selected}}"><a href="{{servlet-context}}/about">About</a></li>
+            {% if user %}
+            <li class="{{admin-selected}}"><a href="{{servlet-context}}/admin">Administration</a></li>
+            <li><a href="{{servlet-context}}/logout">Logout</a></li>
+            {% else %}
+            <li class="{{login-selected}}"><a href="{{servlet-context}}/login">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <div class="container">
       {% block content %}
       {% endblock %}
     </div>
-
-    <!-- scripts -->
-    {% script "/assets/jquery/jquery.min.js" %}
-    {% script "/assets/tether/dist/js/tether.min.js" %}
-    {% script "/assets/bootstrap/js/bootstrap.min.js" %}
-
+    <!-- scripts and styles -->
+    {% style "/css/bootstrap-theme.min.css" %}
+    {% style "/css/bootstrap.min.css" %}
+    {% style "/css/screen.css" %}
+    {% script "/js/jquery-2.1.1.min.js" %}
+    {% script "/js/tinymce/tinymce.min.js" %}
+    {% script "/js/bootstrap.min.js" %}
+    {% script "/js/blog.js" %}
     <script type="text/javascript">
       var context = "{{servlet-context}}";
     </script>
-    {% block page-scripts %}
-    {% endblock %}
   </body>
 </html>
+
