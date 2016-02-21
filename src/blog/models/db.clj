@@ -10,62 +10,48 @@
       user "root"
       password ""]
   (def db {:subprotocol "mysql"
-           :subname (db-url host port database)
-           :user user
-           :password password}))
+           :subname     (db-url host port database)
+           :user        user
+           :password    password}))
 
 (defn create-user [user]
-  db (sql/insert! db :users user))
+  (sql/insert! db :users user))
 
 (defn create-comment [comment]
-  (sql/with-connection db (sql/insert-record :comments comment)))
+  (sql/insert! db :comments comment))
 
 (defn get-all-users []
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from users"] (doall res))))
+  (sql/query db ["select * from users"]))
 
 (defn get-user-count []
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select count(id) as count from users"] (first res))))
+  (sql/query db ["select count(id) as count from users"]))
 
 (defn get-active-user [id]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from users where id=? and active=1" id] (first res))))
+  (sql/query db ["select * from users where id=? and active=1" id]))
 
 (defn get-user [id]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from users where id=?" id] (first res))))
+  (sql/query db ["select * from users where id=?" id]))
 
 (defn get-latest-entries [max]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select entries.*, count(comments.entry) as comments from entries left join comments on (entries.id = comments.entry) group by entries.id order by entries.publishedDate desc limit ?" max] (doall res))))
+  (sql/query db ["select entries.*, count(comments.entry) as comments from entries left join comments on (entries.id = comments.entry) group by entries.id order by entries.publishedDate desc limit ?" max]))
 
 (defn get-entry [id]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from entries where id=?" id] (first res))))
+  (sql/query db ["select * from entries where id=?" id]))
 
 (defn get-comments [id]
-  (sql/with-connection db
-                       (sql/with-query-results
-                         res ["select * from comments where entry=?" id] (doall res))))
+  (sql/query db ["select * from comments where entry=?" id]))
 
 (defn create-entry [entry]
-  (sql/with-connection db (sql/insert-record :entries entry)))
+  (sql/insert! db :entries entry))
 
 (defn update-entry [id entry]
-  (sql/with-connection db (sql/update-values :entries ["id=?" id] entry)))
+    (sql/update! db :entries ["id=?" id] entry))
 
 (defn delete-entry [id]
-  (sql/with-connection db (sql/delete-rows :entries ["id=?" id])))
+   (sql/delete! db :entries ["id=?" id]))
 
 (defn delete-user [id]
-  (sql/with-connection db (sql/delete-rows :users ["id=?" id])))
+   (sql/delete! db :users ["id=?" id]))
 
 (defn update-user [user]
-  (sql/with-connection db (sql/update-values :users ["id=?" (:id user)] user)))
+  (sql/update! db :users ["id=?" (:id user)] user))

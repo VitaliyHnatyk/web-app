@@ -1,6 +1,7 @@
 (ns blog.routes.home
   (:use compojure.core)
   (:require [blog.views.layout :as layout]
+            [compojure.route :as route]
             [blog.models.db :as db]
             [blog.util :as util]
             [noir.session :as session]
@@ -41,14 +42,13 @@
         (resp/redirect (str "/post/" id)))
       (display-post (db/get-entry id) comment))))
 
-(defroutes home-routes
-           (GET "" []
-             (home-page))
-           (GET "/" []
-             (home-page))
-           (GET "/about" []
-             (about-page))
+(defroutes home-routes (GET "" [] (home-page))
+           (GET "/" [] (home-page))
+           (GET "/about" [] (about-page))
            (GET "/post/:id" [id perma]
              (display-post (db/get-entry id)))
            (POST "/post/:id" [id title content name]
-             (handle-comment id title content name)))
+             (handle-comment id title content name))
+           (route/resources "/")
+           (route/not-found "<h1>Page not found</h1>")
+           )
