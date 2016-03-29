@@ -11,6 +11,8 @@
                  [markdown-clj "0.9.43"]
                  [environ "0.5.0"]
                  [org.clojure/clojurescript "1.7.228"]
+                 [clojurewerkz/propertied "1.2.0"]
+                 [org.clojure/core.cache "0.6.4"]
                  [org.clojure/java.jdbc "0.4.2"]
                  [mysql/mysql-connector-java "5.1.36"]]
 

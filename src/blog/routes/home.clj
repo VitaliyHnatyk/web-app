@@ -2,6 +2,7 @@
   (:use compojure.core)
   (:require [blog.views.layout :as layout]
             [compojure.route :as route]
+            [blog.config.config :as prop]
             [blog.models.db :as db]
             [blog.util :as util]
             [noir.session :as session]
@@ -21,8 +22,14 @@
              [:content "content must be at least 2 characters"])
   (not (vali/errors? :title :content :author)))
 
+(defn prop []
+  '(prop/prop))
+
 (defn home-page []
-  (layout/render "home.html" {:entries (db/get-latest-entries 10)}))
+  (layout/render "home.html"
+                 (merge prop
+                       {:entries (db/get-latest-entries 10)}) )
+  println :property)
 
 (defn about-page []
   (layout/render "about.html"))
@@ -52,3 +59,6 @@
            (route/resources "/")
            (route/not-found "<h1>Page not found</h1>")
            )
+
+
+;cache use from https://github.com/clojure/core.cache
