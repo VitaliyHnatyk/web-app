@@ -22,14 +22,12 @@
              [:content "content must be at least 2 characters"])
   (not (vali/errors? :title :content :author)))
 
-(defn prop []
-  '(prop/prop))
 
 (defn home-page []
   (layout/render "home.html"
-                 (merge prop
-                       {:entries (db/get-latest-entries 10)}) )
-  println :property)
+                 (merge {:prop (prop/prop)} {:entries (db/get-latest-entries 10)})
+                 )
+)
 
 (defn about-page []
   (layout/render "about.html"))
