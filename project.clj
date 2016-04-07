@@ -21,8 +21,10 @@
             [lein-cljsbuild "1.0.3"]
             [lein-asset-minifier "0.2.0"]
             [deraen/lein-less4j "0.5.0"]
+            [lein-cascade "0.1.2"]
             [lein-environ "0.5.0"]]
 
+  :clean-targets ["out" "out-adv" "app.js"]
 
   :ring {:handler blog.handler/app
          :init    blog.handler/init
@@ -61,6 +63,16 @@
   {:assets
    {"resources/public/css/site.min.css"
     "resources/public/css/screen.css"}}
+
+
+:cascade {"foo"  [["clean"]]
+          "bar"  ["foo"      ; triggers "foo"
+                  ["javac"]]
+          "baz"  ["bar"      ; triggers "bar"
+                  ["test"]]
+          "quux" ["bar"      ; triggers "bar"
+                  ["doc"]    ; codox plugin example
+                  ["uberjar"]]}
 
   :profiles
   {:uberjar    {:aot :all}
